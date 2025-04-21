@@ -1,0 +1,125 @@
+.main {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  pointer-events: none;
+}
+
+.contentContainer {
+  width: 75%;
+  padding: 2rem;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contentContainer:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.content {
+  flex: 1;
+  animation: fadeIn 0.8s ease-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.content h1 {
+  padding: 4px 0;
+  margin: 12px 0;
+  text-wrap: balance;
+}
+.content p {
+  padding: 4px 0;
+  margin: 8px 0;
+  text-wrap: balance;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--accent-red-dark);
+  transition: all 0.3s;
+
+  &:hover{
+    color: var(--accent-red-light);
+  }
+}
+.contentGif {
+  flex: 0.8;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  animation: slideIn 0.8s ease-out;
+}
+
+.contentGif:hover {
+  transform: scale(1.02);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 1024px) {
+  .contentContainer {
+    width: 85%;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .content,
+  .contentGif {
+    flex: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .contentContainer {
+    width: 90%;
+    padding: 1.5rem;
+  }
+}
