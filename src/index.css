@@ -56,3 +56,12 @@ body {
   font-family: "Cinzel", serif;
   font-size: 1.2;
 }
+
+button {
+  cursor: pointer;
+}
+
+.clear-link {
+  text-decoration: none;
+  color: var(--text-primary);
+}
