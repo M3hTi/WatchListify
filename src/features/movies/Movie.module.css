@@ -47,17 +47,19 @@
 
 .watchListContainer {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   padding: 0.75rem;
+  gap: 8px;
 }
 
-.watchList {
+.watchList,
+.preview {
   background-color: var(--accent-red-light);
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 6px;
   color: var(--text-primary);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -65,7 +67,8 @@
   box-shadow: 0 2px 10px rgba(244, 6, 18, 0.2);
 }
 
-.watchList:hover {
+.watchList:hover,
+.preview:hover {
   background-color: var(--accent-red-dark);
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(244, 6, 18, 0.3);

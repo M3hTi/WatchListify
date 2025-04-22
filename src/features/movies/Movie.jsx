@@ -4,7 +4,10 @@ import { MdDelete } from "react-icons/md";
 import styles from "./Movie.module.css";
 import { useLocalStorage } from "react-haiku";
 import { useEffect, useState } from "react";
-function Movie({ movieObj }) {
+import { useDispatch } from "react-redux";
+import { getDetail } from "./MovieSlice";
+
+function Movie({ movieObj, setOpen }) {
   const {
     title,
     poster_path: poster,
@@ -14,8 +17,7 @@ function Movie({ movieObj }) {
   } = movieObj;
   const [watchList, setWatchList] = useLocalStorage("watchList", []);
   const [isAddedToList, setIsAddedToList] = useState(false);
-
-  // console.log(watchList);
+  const dispatch = useDispatch();
 
   // Check if movie is in watchlist when component mounts or watchList changes
   useEffect(() => {
@@ -38,6 +40,12 @@ function Movie({ movieObj }) {
       console.error("Error updating watchlist:", error);
     }
   }
+
+  function handlePreview() {
+    dispatch(getDetail(movieObj));
+    setOpen(true);
+  }
+
   return (
     <div className={styles.movieCard}>
       <img
@@ -56,6 +64,9 @@ function Movie({ movieObj }) {
         </div>
       </div>
       <div className={styles.watchListContainer}>
+        <button className={styles.preview} onClick={handlePreview}>
+          Preview
+        </button>
         <button className={styles.watchList} onClick={handleAddToWatchList}>
           {!isAddedToList ? (
             <>
@@ -64,7 +75,7 @@ function Movie({ movieObj }) {
             </>
           ) : (
             <>
-              <MdDelete />
+              <MdDelete style={{ fontSize: "2rem" }} />
               Delete from watch list
             </>
           )}
