@@ -1,6 +1,11 @@
-.movieGrid {
+.movieGrid,
+.blur {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 2rem;
   padding: 1rem;
+}
+
+.blur {
+  filter: blur(3px);
 }
