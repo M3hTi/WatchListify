@@ -9,3 +9,13 @@
 .blur {
   filter: blur(3px);
 }
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, 50%);
+}
