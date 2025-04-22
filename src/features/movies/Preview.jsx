@@ -1,10 +1,9 @@
 import { useSelector } from "react-redux";
 import styles from "./Preview.module.css";
-import { Show } from "react-smart-conditional";
 import Spinner from "../../components/Spinner";
 import { useEffect } from "react";
 function Preview({ onClose }) {
-  const { isLoading, selectedMovie } = useSelector(
+  const {  selectedMovie } = useSelector(
     (store) => store.moviesState
   );
 
@@ -32,13 +31,7 @@ function Preview({ onClose }) {
   } = selectedMovie;
 
   return (
-    <Show>
-      <Show.If condition={isLoading}>
-        <div className={styles.loading}>
-          <Spinner />
-        </div>
-      </Show.If>
-      <Show.Else>
+    
         <>
           <div className={styles.overlay}></div>
           <div className={styles.movieCard}>
@@ -57,8 +50,6 @@ function Preview({ onClose }) {
             </div>
           </div>
         </>
-      </Show.Else>
-    </Show>
   );
 }
 
