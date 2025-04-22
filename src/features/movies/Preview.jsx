@@ -2,10 +2,24 @@ import { useSelector } from "react-redux";
 import styles from "./Preview.module.css";
 import { Show } from "react-smart-conditional";
 import Spinner from "../../components/Spinner";
+import { useEffect } from "react";
 function Preview({ onClose }) {
   const { isLoading, selectedMovie } = useSelector(
     (store) => store.moviesState
   );
+
+  useEffect(() => {
+    function handleKeyDown(e) {
+      // console.log(e.key);
+      if (e.key === "Escape") {
+        onClose();
+      } else {
+        e.preventDefault();
+      }
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
 
   // Return early if no movie is selected
   if (!selectedMovie) return null;
