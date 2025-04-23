@@ -1,12 +1,9 @@
-import { useState } from "react";
 import styles from "./Header.module.css";
 import { Link, NavLink } from "react-router-dom";
 import { LuPopcorn } from "react-icons/lu";
 import { FaGithub } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
-function Header() {
-  const [query, setQuery] = useState("");
-
+function Header({ query, setQuery }) {
   return (
     <header className={styles.header}>
       <div className={styles.logoContainer}>
