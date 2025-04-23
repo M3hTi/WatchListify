@@ -4,10 +4,13 @@ import { MdDelete } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
 import { useLocalStorage } from "react-haiku";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { getSerie } from "./SeriesSlice";
 
-function Serie({ serieObj }) {
+function Serie({ serieObj, setOpen }) {
   const [isAddedToWatchList, setIsAddedToWatchList] = useState(false);
   const [watchList, setWatchList] = useLocalStorage("watchList", []);
+  const dispatch = useDispatch();
   const {
     name: title,
     id,
@@ -31,6 +34,11 @@ function Serie({ serieObj }) {
       setWatchList((watchList) => watchList.filter((movie) => movie.id !== id));
     }
   }
+
+  function handlePreview() {
+    setOpen(true);
+    dispatch(getSerie(serieObj));
+  }
   return (
     <div className={styles.serieCard}>
       <img
@@ -49,7 +57,9 @@ function Serie({ serieObj }) {
         </div>
       </div>
       <div className={styles.watchListContainer}>
-        <button className={styles.preview}>Preview</button>
+        <button className={styles.preview} onClick={handlePreview}>
+          Preview
+        </button>
         <button className={styles.watchList} onClick={handleAddSeries}>
           {isAddedToWatchList ? (
             <>
