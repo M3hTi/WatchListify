@@ -1,0 +1,75 @@
+.serieCard {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.serieCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.serieImage {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+}
+
+.serieInfo {
+  padding: 1rem;
+}
+
+.serieTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.serieMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--accent-red-light);
+}
+
+.watchListContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem;
+  gap: 8px;
+}
+
+.watchList,
+.preview {
+  background-color: var(--accent-red-light);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(244, 6, 18, 0.2);
+}
+
+.watchList:hover,
+.preview:hover {
+  background-color: var(--accent-red-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(244, 6, 18, 0.3);
+}
