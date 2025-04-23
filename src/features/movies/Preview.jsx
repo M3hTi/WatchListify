@@ -3,8 +3,9 @@ import styles from "./Preview.module.css";
 import Spinner from "../../components/Spinner";
 import { useEffect } from "react";
 function Preview({ onClose }) {
-  const {  selectedMovie } = useSelector(
-    (store) => store.moviesState
+  const selectedMovie = useSelector(
+    (store) =>
+      store.moviesState.selectedMovie
   );
 
   useEffect(() => {
@@ -31,25 +32,24 @@ function Preview({ onClose }) {
   } = selectedMovie;
 
   return (
-    
-        <>
-          <div className={styles.overlay}></div>
-          <div className={styles.movieCard}>
-            <button className={styles.closeButton} onClick={onClose}>
-              ×
-            </button>
-            <div className={styles.previewContent}>
-              <img className={styles.previewImage} src={poster} alt={title} />
-              <div className={styles.previewInfo}>
-                <h2>{title}</h2>
-                <div className={styles.meta}>
-                  <span>{date.split(" ")[2]}</span>
-                </div>
-                <p className={styles.overview}>{overview}</p>
-              </div>
+    <>
+      <div className={styles.overlay}></div>
+      <div className={styles.movieCard}>
+        <button className={styles.closeButton} onClick={onClose}>
+          ×
+        </button>
+        <div className={styles.previewContent}>
+          <img className={styles.previewImage} src={poster} alt={title} />
+          <div className={styles.previewInfo}>
+            <h2>{title}</h2>
+            <div className={styles.meta}>
+              <span>{date.split(" ")[2]}</span>
             </div>
+            <p className={styles.overview}>{overview}</p>
           </div>
-        </>
+        </div>
+      </div>
+    </>
   );
 }
 
