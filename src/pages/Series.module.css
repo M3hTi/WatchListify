@@ -1,0 +1,23 @@
+.container {
+  min-height: 100vh;
+  background-color: var(--primary-black);
+  color: var(--text-primary);
+}
+
+.main {
+  padding: 2rem;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+@media (max-width: 768px) {
+  .movieGrid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+}
