@@ -21,7 +21,7 @@ function movieReducer(state = initialMovieState, action) {
 }
 
 export function dataReceived() {
-  return async function (dispatch, getState) {
+  return async function getMovies(dispatch, getState) {
     try {
       dispatch({ type: "movie/loading" });
       const res = await fetch(
@@ -49,6 +49,21 @@ export function getDetail(movieObj) {
     const data = await res.json();
     // console.log(data);
     dispatch({ type: "movie/getDetail", payload: data });
+  };
+}
+
+export function searchMovie(query) {
+  return async function getMovie(dispatch, getState) {
+    dispatch({ type: "movie/loading" });
+    try {
+      const res = await fetch(
+        `http://www.omdbapi.com/?apikey=${omdbApi}&t=${query}&type=movie`
+      );
+      const data = await res.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
 
