@@ -6,8 +6,8 @@ import styles from './SeriesList.module.css'
 function SeriesList() {
   const series = useSelector((store) => store.seriesState.series);
   return (
-    <div>
-      <div>
+    <div className={styles.container}>
+      <div className={styles.seriesGrid}>
         {series.map((serie) => (
           <Serie serieObj={serie} key={serie.id} />
         ))}
