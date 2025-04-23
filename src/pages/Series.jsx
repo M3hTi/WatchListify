@@ -10,7 +10,7 @@ import Spinner from "../components/Spinner";
 function Series() {
   const [query, setQuery] = useState("");
 
-  const isLoading = useSelector((store) => store.seriesState.isLoading);
+  const { isLoading, series } = useSelector((store) => store.seriesState);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function Series() {
       <Header query={query} setQuery={setQuery} />
       <main className={styles.main}>
         <Show>
-          <Show.If condition={isLoading}>
+          <Show.If condition={isLoading && series.length === 0}>
             <div className={styles.loading}>
               <Spinner />
             </div>
