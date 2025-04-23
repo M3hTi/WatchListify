@@ -56,7 +56,7 @@ function Movie({ movieObj, setOpen }) {
       <div className={styles.movieInfo}>
         <h3 className={styles.movieTitle}>{title}</h3>
         <div className={styles.movieMeta}>
-          <span>{date.split("-")[0]}</span>
+          <span>{date?.split("-")[0]}</span>
           <div className={styles.rating}>
             <FaStar />
             <span>{vote.toFixed(1)}</span>
