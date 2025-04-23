@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import movieReducer from "./features/movies/MovieSlice";
+import seriesReducer from "./features/series/SeriesSlice";
 
 const store = configureStore({
   reducer: {
     moviesState: movieReducer,
-    // series: seriesReducer,
-    // wishList: whishListReducer,
+    seriesState: seriesReducer,
   },
 });
 
