@@ -2,14 +2,35 @@ import styles from "./Serie.module.css";
 import { IoBookmark } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
+import { useLocalStorage } from "react-haiku";
+import { useEffect, useState } from "react";
 
 function Serie({ serieObj }) {
+  const [isAddedToWatchList, setIsAddedToWatchList] = useState(false);
+  const [watchList, setWatchList] = useLocalStorage("watchList", []);
   const {
     name: title,
+    id,
     poster_path: poster,
     first_air_date: date,
     vote_average: vote,
   } = serieObj;
+
+  useEffect(() => {
+    const isExistInWatchList = watchList.some((movie) => movie.id === id);
+    // console.log(isExistInWatchList)
+    setIsAddedToWatchList(isExistInWatchList);
+  }, [watchList, id]);
+
+  function handleAddSeries() {
+    if (!isAddedToWatchList) {
+      setIsAddedToWatchList(true);
+      setWatchList((watchList) => [...watchList, serieObj]);
+    } else {
+      setIsAddedToWatchList(false);
+      setWatchList((watchList) => watchList.filter((movie) => movie.id !== id));
+    }
+  }
   return (
     <div className={styles.serieCard}>
       <img
@@ -29,11 +50,18 @@ function Serie({ serieObj }) {
       </div>
       <div className={styles.watchListContainer}>
         <button className={styles.preview}>Preview</button>
-        <button className={styles.watchList}>
-          <>
-            <IoBookmark />
-            Add to watch list
-          </>
+        <button className={styles.watchList} onClick={handleAddSeries}>
+          {isAddedToWatchList ? (
+            <>
+              <MdDelete style={{ fontSize: "2rem" }} />
+              Delete from watch list
+            </>
+          ) : (
+            <>
+              <IoBookmark />
+              Add to watch list
+            </>
+          )}
         </button>
       </div>
     </div>
