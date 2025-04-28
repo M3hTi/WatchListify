@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { dataReceived } from "../features/series/SeriesSlice";
+import { dataReceived, searchSeries } from "../features/series/SeriesSlice";
 import { Show } from "react-smart-conditional";
 import SeriesList from "../features/series/SeriesList";
 import styles from "./Series.module.css";
@@ -13,9 +13,16 @@ function Series() {
   const { isLoading, series } = useSelector((store) => store.seriesState);
   const dispatch = useDispatch();
 
+  // useEffect(() => {
+  //   dispatch(dataReceived());
+  // }, [dispatch]);
+
   useEffect(() => {
-    dispatch(dataReceived());
-  }, [dispatch]);
+    const controller = new AbortController();
+    const signal = controller.signal;
+    dispatch(searchSeries(query, signal));
+    return () => controller.abort();
+  }, [query, dispatch]);
   return (
     <div className={styles.container}>
       <Header query={query} setQuery={setQuery} />
