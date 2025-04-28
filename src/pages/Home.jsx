@@ -7,9 +7,11 @@ function Home() {
     <main className={styles.main}>
       <div className={styles.contentContainer}>
         <div className={styles.content}>
-          <h1>SineVision</h1>
+          <h1>WatchListify</h1>
           <p>Welcome to the world of cinema... It's time to pick a movie.</p>
-          <Link to="/movies" className={styles.link}>Explore Movies</Link>
+          <Link to="/movies" className={styles.link}>
+            Explore Movies
+          </Link>
         </div>
         <div className={styles.contentGif}>
           <DotLottieReact
