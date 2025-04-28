@@ -10,16 +10,21 @@ import { normalizeMovieData } from "../../utils/normalizeMovieData";
 
 function Serie({ serieObj, setOpen }) {
   const normalizeSerie = normalizeMovieData(serieObj);
+  console.log(normalizeSerie);
   const [isAddedToWatchList, setIsAddedToWatchList] = useState(false);
   const [watchList, setWatchList] = useLocalStorage("watchList", []);
   const dispatch = useDispatch();
   const {
-    name: title,
+    title,
     id,
     poster_path: poster,
-    first_air_date: date,
+    release_date: date,
     vote_average: vote,
   } = normalizeSerie;
+
+  const posterUrl = poster?.includes("http")
+    ? poster // Use full URL if it's from OMDB
+    : `https://image.tmdb.org/t/p/w500${poster}`; // Add TMDB base URL if it's a path
 
   useEffect(() => {
     const isExistInWatchList = watchList.some((movie) => movie.id === id);
@@ -43,11 +48,7 @@ function Serie({ serieObj, setOpen }) {
   }
   return (
     <div className={styles.serieCard}>
-      <img
-        className={styles.serieImage}
-        src={`https://image.tmdb.org/t/p/w500${poster}`}
-        alt={title}
-      />
+      <img className={styles.serieImage} src={`${posterUrl}`} alt={title} />
       <div className={styles.serieInfo}>
         <h3 className={styles.serieTitle}>{title}</h3>
         <div className={styles.serieMeta}>
