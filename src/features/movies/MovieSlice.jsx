@@ -5,16 +5,36 @@ const initialMovieState = {
   movies: [],
   isLoading: false,
   selectedMovie: null,
+  error: null,
 };
 
 function movieReducer(state = initialMovieState, action) {
   switch (action.type) {
     case "movie/loading":
-      return { ...state, isLoading: true, selectedMovie: null };
+      return { ...state, isLoading: true, selectedMovie: null, error: null };
     case "movie/dataReceived":
-      return { ...state, movies: action.payload, isLoading: false };
+      return {
+        ...state,
+        movies: action.payload,
+        isLoading: false,
+        error: null,
+      };
     case "movie/getDetail":
-      return { ...state, selectedMovie: action.payload, isLoading: false };
+      return {
+        ...state,
+        selectedMovie: action.payload,
+        isLoading: false,
+        error: null,
+      };
+    case "movie/searchMovie":
+      return {
+        ...state,
+        movies: action.payload,
+        isLoading: false,
+        error: null,
+      };
+    case "movie/error":
+      return { ...state, error: action.payload, isLoading: false, movies: [] };
     default:
       return state;
   }
@@ -52,17 +72,41 @@ export function getDetail(movieObj) {
   };
 }
 
-export function searchMovie(query) {
+export function searchMovie(query, signal) {
   return async function getMovie(dispatch, getState) {
+    if (!query.trim()) {
+      // If query is empty, fetch popular movies instead
+      dispatch(dataReceived());
+      return;
+    }
+
     dispatch({ type: "movie/loading" });
     try {
       const res = await fetch(
-        `http://www.omdbapi.com/?apikey=${omdbApi}&t=${query}&type=movie`
+        `http://www.omdbapi.com/?apikey=${omdbApi}&s=${query}&type=movie`,
+        { signal }
       );
       const data = await res.json();
       console.log(data);
+
+      if (data.Response === "False") {
+        dispatch({
+          type: "movie/error",
+          payload: data.Error || "No movies found",
+        });
+        return;
+      }
+
+      dispatch({
+        type: "movie/searchMovie",
+        payload: data.Search,
+      });
     } catch (error) {
       console.log(error);
+      dispatch({
+        type: "movie/error",
+        payload: error.message || "An error occurred while searching",
+      });
     }
   };
 }
