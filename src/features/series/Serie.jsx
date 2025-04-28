@@ -6,8 +6,10 @@ import { useLocalStorage } from "react-haiku";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getSerie } from "./SeriesSlice";
+import { normalizeMovieData } from "../../utils/normalizeMovieData";
 
 function Serie({ serieObj, setOpen }) {
+  const normalizeSerie = normalizeMovieData(serieObj);
   const [isAddedToWatchList, setIsAddedToWatchList] = useState(false);
   const [watchList, setWatchList] = useLocalStorage("watchList", []);
   const dispatch = useDispatch();
@@ -17,7 +19,7 @@ function Serie({ serieObj, setOpen }) {
     poster_path: poster,
     first_air_date: date,
     vote_average: vote,
-  } = serieObj;
+  } = normalizeSerie;
 
   useEffect(() => {
     const isExistInWatchList = watchList.some((movie) => movie.id === id);
@@ -28,7 +30,7 @@ function Serie({ serieObj, setOpen }) {
   function handleAddSeries() {
     if (!isAddedToWatchList) {
       setIsAddedToWatchList(true);
-      setWatchList((watchList) => [...watchList, serieObj]);
+      setWatchList((watchList) => [...watchList, normalizeSerie]);
     } else {
       setIsAddedToWatchList(false);
       setWatchList((watchList) => watchList.filter((movie) => movie.id !== id));
@@ -37,7 +39,7 @@ function Serie({ serieObj, setOpen }) {
 
   function handlePreview() {
     setOpen(true);
-    dispatch(getSerie(serieObj));
+    dispatch(getSerie(normalizeSerie));
   }
   return (
     <div className={styles.serieCard}>
@@ -49,10 +51,10 @@ function Serie({ serieObj, setOpen }) {
       <div className={styles.serieInfo}>
         <h3 className={styles.serieTitle}>{title}</h3>
         <div className={styles.serieMeta}>
-          <span>{date.split("-")[0]}</span>
+          <span>{date?.split("-")[0]}</span>
           <div className={styles.raing}>
             <FaStar />
-            <span>{vote.toFixed(1)}</span>
+            <span>{vote?.toFixed(1)}</span>
           </div>
         </div>
       </div>
