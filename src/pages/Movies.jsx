@@ -17,7 +17,11 @@ function Movies() {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(searchMovie(query));
+    const controller = new AbortController();
+    const signal = controller.signal;
+    dispatch(searchMovie(query, signal));
+
+    return () => controller.abort();
   }, [dispatch, query]);
 
   return (
