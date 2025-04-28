@@ -19,3 +19,18 @@
   top: 50%;
   transform: translate(-50%, 50%);
 }
+.error,
+.noResults {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+  margin: 2rem 0;
+}
+
+.error {
+  color: #e50914;
+}
