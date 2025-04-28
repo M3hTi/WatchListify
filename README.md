@@ -1,153 +1,265 @@
-# SineVision - Your Personal Movie Watchlist
+# SineVision - Movie Watchlist App
 
-A modern React application that helps you keep track of your favorite movies and discover new ones. Create personalized watchlists, mark movies as watched, and never lose track of what you want to watch next!
+A React-based movie watchlist application where you can track and manage your favorite movies and TV series. Built with modern web technologies and powered by TMDB and OMDB APIs for comprehensive movie and TV show information.
 
 ## 🎬 Features
 
-- **Movie Management**
+- **Movie & TV Series Management**
 
-  - Create and manage multiple watchlists
-  - Add movies to your favorites
-  - Mark movies as watched/unwatched
-  - Rate and review movies
+  - Browse popular movies and TV series
+  - Search across multiple databases
+  - Create and manage watchlists
+  - View detailed information from both TMDB and OMDB
+  - Rate and track your favorites
+
+- **Dual API Integration**
+
+  - TMDB (The Movie Database) API for trending content and primary data
+  - OMDB (Open Movie Database) API for additional movie details
+  - Rich movie metadata including ratings, plots, and release dates
+  - Comprehensive search across both databases
 
 - **User Experience**
-
   - Modern and intuitive interface
   - Responsive design for all devices
-  - Smooth animations and transitions
-  - Quick search and filtering options
-  - Dark/Light mode support
+  - Smart search functionality
+  - Beautiful animations and transitions
+  - Loading states and error handling
 
-- **Technical Features**
-  - Fast and responsive React application
-  - Efficient state management with Redux
-  - Smooth navigation with React Router
-  - Beautiful animations with Lottie Files
-  - Modern UI components
-  - Comprehensive movie information display
+## 🚀 Quick Start Guide
 
-## 🛠️ Technologies
+### Prerequisites
 
-- React 19 - Latest React features
-- Vite 6 - Lightning-fast development
-- Redux Toolkit - State management
-- React Router DOM 7 - Navigation
-- React Icons - Beautiful icons
-- DotLottie React - Smooth animations
-- ESLint - Code quality
+Before you begin, ensure you have the following installed:
 
-## 📦 Installation
+- [Node.js](https://nodejs.org/) (version 16 or higher)
+- npm (comes with Node.js)
+- A modern web browser (Chrome, Firefox, Safari, or Edge)
 
-1. Clone the repository:
+### Local Setup
 
-```bash
-git clone <repository-url>
-cd sinevision
-```
+1. **Clone the Repository**
 
-2. Install dependencies:
+   ```bash
+   git clone <your-repository-url>
+   cd sinevision
+   ```
 
-```bash
-npm install
-```
+2. **Install Dependencies**
 
-## 🚀 Getting Started
+   ```bash
+   npm install
+   ```
 
-### Development
+3. **Configure Environment Variables**
+   Create a `.env` file in the root directory with your API keys:
 
-Start the development server:
+   ```env
+   VITE_API_KEY=your_tmdb_api_key_here
+   VITE_OMDB_API_KEY=your_omdb_api_key_here
+   ```
 
-```bash
-npm run dev
-```
+   You can obtain API keys from:
 
-### Build
+   - [TMDB API](https://www.themoviedb.org/documentation/api)
+   - [OMDB API](http://www.omdbapi.com/apikey.aspx)
 
-Create a production build:
+4. **Start Development Server**
 
-```bash
-npm run build
-```
+   ```bash
+   npm run dev
+   ```
 
-### Preview
+   This will start the development server on `http://localhost:5173`
 
-Preview the production build:
+5. **Build for Production**
+   ```bash
+   npm run build
+   npm run preview
+   ```
+   The preview server will start on `http://localhost:4173`
 
-```bash
-npm run preview
-```
+## 🛠️ Tech Stack
 
-### Code Quality
+### Core Technologies
 
-Run ESLint:
+- **React 19** - UI framework
+- **Vite 6** - Build tool and development server
+- **Redux Toolkit** - State management
+- **React Router DOM 7** - Navigation
 
-```bash
-npm run lint
-```
+### UI Components & Styling
 
-## 📱 Usage Guide
+- **React Icons** - Icon library
+- **DotLottie React** - Animation components
+- **React Haiku** - UI components
+- **LDRS** - Loading animations
 
-1. **Create Your Account**
+### Development Tools
 
-   - Sign up with your email
-   - Customize your profile
-
-2. **Start Your Watchlist**
-
-   - Search for movies
-   - Add movies to your watchlist
-   - Create multiple lists (e.g., "Want to Watch", "Favorites", "Watched")
-
-3. **Manage Your Movies**
-
-   - Mark movies as watched
-   - Rate movies you've seen
-   - Add personal notes and reviews
-   - Sort and filter your lists
-
-4. **Discover New Movies**
-   - Browse trending movies
-   - Get personalized recommendations
-   - See what others are watching
+- **ESLint** - Code linting
+- **TypeScript** - Type checking (via @types/react)
 
 ## 📁 Project Structure
 
 ```
 sinevision/
-├── src/
-│   ├── assets/      # Images and static resources
-│   ├── components/  # Reusable UI components
-│   ├── features/    # Redux slices and movie management
-│   ├── pages/       # Main application pages
-│   ├── utils/       # Helper functions
-│   ├── App.jsx      # Main application component
-│   ├── Store.jsx    # Redux store configuration
-│   └── main.jsx     # Application entry point
-├── public/          # Public assets
-└── vite.config.js   # Build configuration
+├── src/                  # Source code
+│   ├── assets/          # Images, fonts, and other static files
+│   ├── components/      # Reusable UI components
+│   ├── features/        # Redux features and slices
+│   │   ├── movies/      # Movie-related features
+│   │   └── series/      # TV series features
+│   ├── pages/           # Application pages/routes
+│   ├── utils/           # Utility functions
+│   ├── Store.jsx        # Redux store configuration
+│   ├── App.jsx          # Main application component
+│   └── main.jsx         # Application entry point
+├── public/              # Public static files
+├── index.html           # HTML entry point
+├── vite.config.js       # Vite configuration
+├── eslint.config.js     # ESLint configuration
+├── package.json         # Project dependencies
+└── README.md           # Project documentation
 ```
+
+## 📝 Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint for code quality
 
 ## 🔧 Configuration
 
-The project includes:
+### Environment Setup
 
-- `vite.config.js` - Build and development settings
-- `eslint.config.js` - Code quality rules
+The project requires two different API keys to function properly. Create a `.env` file in the root directory and add both API keys:
+
+```env
+# TMDB API Configuration
+VITE_API_KEY=your_tmdb_api_key_here        # Used for trending movies and TV shows
+# Get your TMDB API key at: https://www.themoviedb.org/settings/api
+# Steps to get TMDB API key:
+# 1. Create an account at https://www.themoviedb.org/
+# 2. Go to Settings -> API
+# 3. Request an API key for developer use
+# 4. Copy the API key (v3 auth)
+
+# OMDB API Configuration
+VITE_OMDB_API_KEY=your_omdb_api_key_here   # Used for detailed movie information
+# Get your OMDB API key at: http://www.omdbapi.com/apikey.aspx
+# Steps to get OMDB API key:
+# 1. Go to http://www.omdbapi.com/apikey.aspx
+# 2. Choose FREE or Patreon plan
+# 3. Fill out the form
+# 4. Verify your email and activate the key
+```
+
+#### API Features
+
+1. **TMDB API** (The Movie Database)
+
+   - Provides trending movies and TV shows
+   - High-quality poster images
+   - Basic movie/TV show information
+   - Popular content listings
+   - Base URL for images: `https://image.tmdb.org/t/p/w500`
+
+2. **OMDB API** (Open Movie Database)
+   - Detailed movie and TV show information
+   - Ratings and reviews
+   - Plot summaries
+   - Cast information
+   - Release dates and runtime
+
+Both APIs must be properly configured for the application to work correctly. Missing or invalid API keys will result in failed requests and empty content.
+
+### Development Server
+
+- Default port: 5173
+- To change port: `npm run dev -- --port 3000`
+
+### Build Configuration
+
+- Output directory: `dist/`
+- Build command: `npm run build`
+
+## 🚀 Development Workflow
+
+1. **Start Development**
+
+   ```bash
+   npm run dev
+   ```
+
+   This starts the development server with hot module replacement (HMR).
+
+2. **Code Quality**
+
+   ```bash
+   npm run lint
+   ```
+
+   Run this before committing to ensure code quality.
+
+3. **Testing Production Build**
+   ```bash
+   npm run build
+   npm run preview
+   ```
+   This builds and serves the production version locally.
+
+## 🐛 Troubleshooting
+
+Common issues and solutions:
+
+1. **Port Already in Use**
+
+   ```bash
+   kill -9 $(lsof -ti:5173)  # For macOS/Linux
+   # OR
+   netstat -ano | findstr :5173  # For Windows
+   ```
+
+2. **Dependencies Issues**
+
+   ```bash
+   rm -rf node_modules
+   npm cache clean --force
+   npm install
+   ```
+
+3. **API Key Issues**
+
+   - Ensure both API keys are correctly set in `.env`
+   - Check if the keys are valid and active
+   - Verify the API endpoints are accessible
+
+4. **Image Loading Issues**
+
+   - Check if TMDB image URLs are correctly formatted
+   - Verify your internet connection
+   - Clear browser cache if images are not updating
+
+5. **Search Not Working**
+   - Ensure both APIs are responding
+   - Check the browser console for errors
+   - Verify search query formatting
+
+## 📚 Additional Resources
+
+- [Vite Documentation](https://vitejs.dev/)
+- [React Documentation](https://react.dev/)
+- [Redux Toolkit Guide](https://redux-toolkit.js.org/)
+- [React Router Documentation](https://reactrouter.com/)
+- [TMDB API Documentation](https://developers.themoviedb.org/3)
+- [OMDB API Documentation](http://www.omdbapi.com/)
 
 ## 🤝 Contributing
 
-This is a private project. For contribution inquiries, please contact the project maintainers.
+This is a private project. Please contact the project maintainers for contribution guidelines.
 
 ## 📝 License
 
 This project is private and not licensed for public use.
-
-## 🎯 Future Features
-
-- Social sharing capabilities
-- Integration with movie APIs
-- Advanced filtering options
-- Movie recommendations
-- Watch party scheduling
-- Mobile app version
