@@ -4,13 +4,23 @@ export function normalizeMovieData(movieObj) {
   if (movieObj.Title) {
     return {
       id: movieObj.imdbID,
+      name: movieObj.Title, // Add name for TV series components
       title: movieObj.Title,
       poster_path: movieObj.Poster,
-      release_date: movieObj.Year + "-01-01", // OMDB only provides year
+      first_air_date: movieObj.Year.split("–")[0] + "-01-01", // Format year for TV series
+      release_date: movieObj.Year.split("–")[0] + "-01-01",
       vote_average: movieObj.imdbRating ? parseFloat(movieObj.imdbRating) : 0,
-      // Add any other properties you need
     };
   }
-  // If it's TMDB API data, return as is
-  return movieObj;
+
+  // If it's TMDB API data
+  return {
+    id: movieObj.id,
+    name: movieObj.title || movieObj.name || "", // Ensure name exists
+    title: movieObj.title || movieObj.name || "",
+    poster_path: movieObj.poster_path || "",
+    first_air_date: movieObj.first_air_date || movieObj.release_date || "",
+    release_date: movieObj.release_date || movieObj.first_air_date || "",
+    vote_average: movieObj.vote_average || 0,
+  };
 }
