@@ -6,15 +6,18 @@ import { useLocalStorage } from "react-haiku";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getDetail } from "./MovieSlice";
+import { normalizeMovieData } from "../../utils/normalizeMovieData";
 
 function Movie({ movieObj, setOpen }) {
+  const normalizedMovie = normalizeMovieData(movieObj);
   const {
     title,
     poster_path: poster,
     release_date: date,
     vote_average: vote,
     id,
-  } = movieObj;
+  } = normalizedMovie;
+
   const [watchList, setWatchList] = useLocalStorage("watchList", []);
   const [isAddedToList, setIsAddedToList] = useState(false);
   const dispatch = useDispatch();
@@ -29,7 +32,7 @@ function Movie({ movieObj, setOpen }) {
     try {
       if (!isAddedToList) {
         // Add to watchlist
-        setWatchList((currentList) => [...currentList, movieObj]);
+        setWatchList((currentList) => [...currentList, normalizedMovie]);
       } else {
         // Remove from watchlist
         setWatchList((currentList) =>
@@ -42,24 +45,24 @@ function Movie({ movieObj, setOpen }) {
   }
 
   function handlePreview() {
-    dispatch(getDetail(movieObj));
+    dispatch(getDetail(normalizedMovie));
     setOpen(true);
   }
 
+  const posterUrl = poster?.includes("http")
+    ? poster // Use full URL if it's from OMDB
+    : `https://image.tmdb.org/t/p/w500${poster}`; // Add TMDB base URL if it's a path
+
   return (
     <div className={styles.movieCard}>
-      <img
-        className={styles.movieImage}
-        src={`https://image.tmdb.org/t/p/w500${poster}`}
-        alt={title}
-      />
+      <img className={styles.movieImage} src={posterUrl} alt={title} />
       <div className={styles.movieInfo}>
         <h3 className={styles.movieTitle}>{title}</h3>
         <div className={styles.movieMeta}>
           <span>{date?.split("-")[0]}</span>
           <div className={styles.rating}>
             <FaStar />
-            <span>{vote.toFixed(1)}</span>
+            <span>{typeof vote === "number" ? vote.toFixed(1) : vote}</span>
           </div>
         </div>
       </div>
