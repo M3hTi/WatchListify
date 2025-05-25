@@ -83,7 +83,7 @@ export function searchMovie(query, signal) {
     dispatch({ type: "movie/loading" });
     try {
       const res = await fetch(
-        `http://www.omdbapi.com/?apikey=${omdbApi}&s=${query}&type=movie`,
+        `https://www.omdbapi.com/?apikey=${omdbApi}&s=${query}&type=movie`,
         { signal }
       );
       const data = await res.json();
