@@ -61,7 +61,7 @@ function Header({ query, setQuery }) {
 
       <div className={styles.github}>
         <a
-          href="https://github.com/yourusername/sinevision"
+          href="https://github.com/M3hTi/WatchListify"
           target="_blank"
           rel="noopener noreferrer"
           className={`clear-link ${styles.link}`}
