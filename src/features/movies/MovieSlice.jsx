@@ -62,7 +62,7 @@ export function getDetail(movieObj) {
     const { title, release_date: date } = movieObj;
     dispatch({ type: "movie/loading" });
     const res = await fetch(
-      `http://www.omdbapi.com/?apikey=${omdbApi}&t=${title}&y=${
+      `https://www.omdbapi.com/?apikey=${omdbApi}&t=${title}&y=${
         date.split("-")[0]
       }&type=movie`
     );
